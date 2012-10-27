@@ -19,20 +19,20 @@ function dirtree($fup_id,$base_list_id='',$base_list_class='',$site_id=1)
 
 	// Grab File Upload Location Info
 
-	// By FUP ID
+	// By FUL ID
 	if ( is_int($fup_id) ) $fup_q = $ee->db->get_where('upload_prefs',array('id'=>$fup_id,'site_id'=>$site_id));
 
-	// By FUP Name
+	// By FUL Name
 	if ( is_string($fup_id) ) $fup_q = $ee->db->get_where('upload_prefs',array('Name'=>$fup_id,'site_id'=>$site_id));
 
-	// By neither? DIE!
+	// No FUL identification provided? DIE!
 	if ( ! is_int($fup_id) && ! is_string($fup_id) ) return '';
 
-	// See if we found a FUP
+	// See if we found a FUL
 	if ( $fup_q->num_rows() > 0 )
 	{
 
-		// Found 'im. Here's your FUP info
+		// Found 'im. Here's your FUL info
 		$fup_info = $fup_q->row_array();
 		$document_root = $_SERVER['DOCUMENT_ROOT'];
 		$full_path = $fup_info['server_path'];
@@ -40,7 +40,7 @@ function dirtree($fup_id,$base_list_id='',$base_list_class='',$site_id=1)
 
 	} else {
 
-		// No FUP by that id / name? DIE!
+		// No FUL by that id / name? DIE!
 		return '';
 
 	}
@@ -79,18 +79,24 @@ function dirtree($fup_id,$base_list_id='',$base_list_class='',$site_id=1)
 	$list = $dom->createElement('ol');
 	$dom->appendChild($list);
 	$node = $list;
+	
+	// Add ID attribute, if provided
 	if ( $base_list_id != '' )
 	{
 		$list_id = $dom->createAttribute('id');
 		$list_id->value = $base_list_id;
 		$node->appendChild($list_id);
 	}
+	
+	// Add CLASS attribute, if provided
 	if ( $base_list_class != '' )
 	{
 		$list_class = $dom->createAttribute('class');
 		$list_class->value = $base_list_class;
 		$node->appendChild($list_class);
 	}
+	
+	// Set initial depth
 	$depth = 0;
 
 
