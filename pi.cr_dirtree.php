@@ -50,13 +50,16 @@ function dirtree($fup_id,$base_list_id='',$base_list_class='',$site_id=1)
 	// Grab Assets Info
 	
 	// Check to see if Assets table exists.
-	$asset_data_q = $ee->db->get('assets');
-	if ( $asset_data_q->num_rows() > 0 )
+	if ( $ee->db->query('SHOW TABLES LIKE `'.$ee->db->dbprefix.'assets`;')->num_rows() == 1 )
 	{
-		$asset_data = array();
-		foreach ($asset_data_q->result_array() as $r)
+		$asset_data_q = $ee->db->get('assets');
+		if ( $asset_data_q->num_rows() > 0 )
 		{
-			$asset_data[str_replace('{filedir_'.$fup_id.'}',$relative_path,$r['file_path'])] = $r;
+			$asset_data = array();
+			foreach ($asset_data_q->result_array() as $r)
+			{
+				$asset_data[str_replace('{filedir_'.$fup_id.'}',$relative_path,$r['file_path'])] = $r;
+			}
 		}
 	}
 
