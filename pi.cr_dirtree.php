@@ -118,13 +118,23 @@ function dirtree($fup_id,$base_list_id='',$base_list_class='',$site_id=1)
 				$a->appendChild($a_href);
 				$li->appendChild($li_class);
 				$li->appendChild($a);
-				if ( isset($asset_data[$a_href->value]['desc']) ) {
-					$span = $dom->createElement('span',$asset_data[$a_href->value]['desc']);
-					$span_class = $dom->createAttribute('class');
-					$span_class->value = 'desc';
-					$span->appendChild($span_class);
-					$li->appendChild($span);
+				
+				// Add Assets data, if available
+				if ( isset($asset_data[$a_href->value]) && is_array($asset_data[$a_href->value]) && ! empty($asset_data[$a_href->value]) ) {
+					$info_div = $dom->createElement('div');
+					$info_div_class = $dom->createAttribute('class');
+					$info_div_class->value = 'file-asset-info';
+					foreach ( $asset_data[$a_href->value] as $k => $v )
+					{
+						$span = $dom->createElement('span',$v);
+						$span_class = $dom->createAttribute('class');
+						$span_class->value = $k;
+						$span->appendChild($span_class);
+						$info_div->appendChild($span);
+					}
+					$li->appendChild($info_div);
 				}
+				
 				break;
 		}
 
