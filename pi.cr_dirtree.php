@@ -124,6 +124,7 @@ function dirtree($fup_id,$base_list_id='',$base_list_class='',$site_id=1)
 					$info_div = $dom->createElement('div');
 					$info_div_class = $dom->createAttribute('class');
 					$info_div_class->value = 'file-asset-info';
+					$info_div->appendChild($info_div_class);
 					foreach ( $asset_data[$a_href->value] as $k => $v )
 					{
 						$span = $dom->createElement('span',$v);
