@@ -12,7 +12,7 @@
 
 $plugin_info = array(
 	'pi_name' => 'CR Dirtree',
-	'pi_version' => '0.1',
+	'pi_version' => '0.9',
 	'pi_author' => 'Mark Drzycimski',
 	'pi_author_url' => 'http://github.com/mark-cr',
 	'pi_description' => 'Return an ordered list representing an ExpressionEngine File Upload Directory.',
