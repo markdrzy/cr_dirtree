@@ -128,14 +128,15 @@ class Cr_dirtree {
 					$li = $dom->createElement('li');
 					$li->setAttribute('class','file '.array_pop(explode('.',$object->getFilename())));
 					$a = $dom->createElement('a', str_replace('_',' ',$object->getFilename()));
-					$a->setAttribute('href',str_replace($document_root,'',$object->getPathname()));
+					$file_url = str_replace($document_root,'',$object->getPathname());
+					$a->setAttribute('href',$file_url);
 					$li->appendChild($a);
 					
 					// Add Assets data, if available
-					if ( isset($asset_data[$a_href->value]) && is_array($asset_data[$a_href->value]) && ! empty($asset_data[$a_href->value]) ) {
+					if ( isset($asset_data[$file_url]) && is_array($asset_data[$file_url]) && ! empty($asset_data[$file_url]) ) {
 						$info_div = $dom->createElement('div');
 						$info_div->setAttribute('class','file-asset-info');
-						foreach ( $asset_data[$a_href->value] as $k => $v )
+						foreach ( $asset_data[$file_url] as $k => $v )
 						{
 							$span = $dom->createElement('span',$v);
 							$span->setAttribute('class',$k);
