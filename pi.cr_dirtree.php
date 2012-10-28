@@ -30,10 +30,10 @@ class Cr_dirtree {
 	
 	
 		// Get plugin parameters
-		$fud_id				= ( $this->EE->TMPL->fetch_param('fud_id') )? $this->EE->TMPL->fetch_param('fud_id'): '';
-		$base_list_id		= ( $this->EE->TMPL->fetch_param('base_list_id') )? $this->EE->TMPL->fetch_param('base_list_id'): '';
-		$base_list_class	= ( $this->EE->TMPL->fetch_param('base_list_class') )? $this->EE->TMPL->fetch_param('base_list_class'): '';
-		$site_id			= ( $this->EE->TMPL->fetch_param('site_id') )? $this->EE->TMPL->fetch_param('site_id'): 1;
+		$fud_id				= ( $ee->TMPL->fetch_param('fud_id') )? $ee->TMPL->fetch_param('fud_id'): '';
+		$base_list_id		= ( $ee->TMPL->fetch_param('base_list_id') )? $ee->TMPL->fetch_param('base_list_id'): '';
+		$base_list_class	= ( $ee->TMPL->fetch_param('base_list_class') )? $ee->TMPL->fetch_param('base_list_class'): '';
+		$site_id			= ( $ee->TMPL->fetch_param('site_id') )? $ee->TMPL->fetch_param('site_id'): 1;
 	
 	
 	
