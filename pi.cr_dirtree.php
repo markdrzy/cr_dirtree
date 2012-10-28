@@ -81,20 +81,10 @@ function dirtree($fud_id,$base_list_id='',$base_list_class='',$site_id=1)
 	$node = $list;
 	
 	// Add ID attribute, if provided
-	if ( $base_list_id != '' )
-	{
-		$list_id = $dom->createAttribute('id');
-		$list_id->value = $base_list_id;
-		$node->appendChild($list_id);
-	}
+	if ( $base_list_id != '' ) $node->setAttribute('id',$base_list_id);
 	
 	// Add CLASS attribute, if provided
-	if ( $base_list_class != '' )
-	{
-		$list_class = $dom->createAttribute('class');
-		$list_class->value = $base_list_class;
-		$node->appendChild($list_class);
-	}
+	if ( $base_list_class != '' ) $node->setAttribute('class',$base_list_class);
 	
 	// Set initial depth
 	$depth = 0;
@@ -111,35 +101,25 @@ function dirtree($fud_id,$base_list_id='',$base_list_class='',$site_id=1)
 			case TRUE:
 				// This object is a directory
 				$li = $dom->createElement('li', str_replace('_',' ',$object->getFilename()));
-				$class = $dom->createAttribute('class');
-				$class->value = 'dir';
-				$li->appendChild($class);
+				$li->setAttribute('class','dir');
 				break;
 
 			case FALSE:
 				// This object is a file
 				$li = $dom->createElement('li');
-				$li_class = $dom->createAttribute('class');
-				$li_class->value = 'file '.array_pop(explode('.',$object->getFilename()));
+				$li->setAttribute('class','file '.array_pop(explode('.',$object->getFilename())));
 				$a = $dom->createElement('a', str_replace('_',' ',$object->getFilename()));
-				$a_href = $dom->createAttribute('href');
-				$a_href->value = str_replace($document_root,'',$object->getPathname());
-				$a->appendChild($a_href);
-				$li->appendChild($li_class);
+				$a->setAttribute('href',str_replace($document_root,'',$object->getPathname()));
 				$li->appendChild($a);
 				
 				// Add Assets data, if available
 				if ( isset($asset_data[$a_href->value]) && is_array($asset_data[$a_href->value]) && ! empty($asset_data[$a_href->value]) ) {
 					$info_div = $dom->createElement('div');
-					$info_div_class = $dom->createAttribute('class');
-					$info_div_class->value = 'file-asset-info';
-					$info_div->appendChild($info_div_class);
+					$info_div->setAttribute('class','file-asset-info');
 					foreach ( $asset_data[$a_href->value] as $k => $v )
 					{
 						$span = $dom->createElement('span',$v);
-						$span_class = $dom->createAttribute('class');
-						$span_class->value = $k;
-						$span->appendChild($span_class);
+						$span->setAttribute('class',$k);
 						$info_div->appendChild($span);
 					}
 					$li->appendChild($info_div);
