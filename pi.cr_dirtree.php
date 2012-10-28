@@ -20,8 +20,6 @@ $plugin_info = array(
 
 class Cr_dirtree {
 
-	public $return_data;
-
 	public function dirtree()
 	{
 		// Instantiate EE
@@ -178,7 +176,7 @@ class Cr_dirtree {
 	
 		// Output DOM as HTML
 		$dom->formatOutput = TRUE;
-		$this->return_data = $dom->saveHtml();
+		return $dom->saveHtml();
 	
 	}
 
