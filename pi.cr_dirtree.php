@@ -10,37 +10,37 @@
  * @link		http://https://github.com/mark-cr
  */
 
-function dirtree($fup_id,$base_list_id='',$base_list_class='',$site_id=1)
+function dirtree($fud_id,$base_list_id='',$base_list_class='',$site_id=1)
 {
 	// Instantiate EE
 	$ee =& get_instance(); // Do we need to do this in a plugin?
 
 
 
-	// Grab File Upload Location Info
+	// Grab File Upload Destination Info
 
-	// By FUL ID
-	if ( is_int($fup_id) ) $fup_q = $ee->db->get_where('upload_prefs',array('id'=>$fup_id,'site_id'=>$site_id));
+	// By FUD ID
+	if ( is_int($fud_id) ) $fud_q = $ee->db->get_where('upload_prefs',array('id'=>$fud_id,'site_id'=>$site_id));
 
-	// By FUL Name
-	if ( is_string($fup_id) ) $fup_q = $ee->db->get_where('upload_prefs',array('Name'=>$fup_id,'site_id'=>$site_id));
+	// By FUD Name
+	if ( is_string($fud_id) ) $fud_q = $ee->db->get_where('upload_prefs',array('Name'=>$fud_id,'site_id'=>$site_id));
 
-	// No FUL identification provided? DIE!
-	if ( ! is_int($fup_id) && ! is_string($fup_id) ) return '';
+	// No FUD identification provided? DIE!
+	if ( ! is_int($fud_id) && ! is_string($fud_id) ) return '';
 
-	// See if we found a FUL
-	if ( $fup_q->num_rows() > 0 )
+	// See if we found a FUD
+	if ( $fud_q->num_rows() > 0 )
 	{
 
-		// Found 'im. Here's your FUL info
-		$fup_info = $fup_q->row_array();
+		// Found 'im. Here's your FUD info
+		$fud_info = $fud_q->row_array();
 		$document_root = $_SERVER['DOCUMENT_ROOT'];
-		$full_path = $fup_info['server_path'];
-		$relative_path = str_replace($document_root,'',$fup_info['server_path']);
+		$full_path = $fud_info['server_path'];
+		$relative_path = str_replace($document_root,'',$fud_info['server_path']);
 
 	} else {
 
-		// No FUL by that id / name? DIE!
+		// No FUD by that id / name? DIE!
 		return '';
 
 	}
@@ -58,7 +58,7 @@ function dirtree($fup_id,$base_list_id='',$base_list_class='',$site_id=1)
 			$asset_data = array();
 			foreach ($asset_data_q->result_array() as $r)
 			{
-				$asset_data[str_replace('{filedir_'.$fup_id.'}',$relative_path,$r['file_path'])] = $r;
+				$asset_data[str_replace('{filedir_'.$fud_id.'}',$relative_path,$r['file_path'])] = $r;
 			}
 		}
 	}
