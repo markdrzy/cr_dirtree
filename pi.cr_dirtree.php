@@ -178,7 +178,7 @@ class Cr_dirtree {
 	
 		// Output DOM as HTML
 		$dom->formatOutput = TRUE;
-		return $this->return_data = $dom->saveHtml();
+		$this->return_data = $dom->saveHtml();
 	
 	}
 
