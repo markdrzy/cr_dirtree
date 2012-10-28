@@ -80,6 +80,11 @@ class Cr_dirtree {
 					$asset_data[str_replace('{filedir_'.$fud_id.'}',$relative_path,$r['file_path'])] = $r;
 				}
 			}
+			// Define Assets fields / columns that should be ignored and not output
+			$assets_ignored_fields = array(
+				'asset_id',
+				'file_path'
+				);
 		}
 	
 		// Initialize Directory Object
@@ -138,9 +143,12 @@ class Cr_dirtree {
 						$info_div->setAttribute('class','file-asset-info');
 						foreach ( $asset_data[$file_url] as $k => $v )
 						{
-							$span = $dom->createElement('span',$v);
-							$span->setAttribute('class',$k);
-							$info_div->appendChild($span);
+							if ( ! in_array($k,$assets_ignored_fields) && $v != '' )
+							{
+								$span = $dom->createElement('span',$v);
+								$span->setAttribute('class',$k);
+								$info_div->appendChild($span);
+							}
 						}
 						$li->appendChild($info_div);
 					}
