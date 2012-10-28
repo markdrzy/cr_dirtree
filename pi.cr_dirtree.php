@@ -44,7 +44,7 @@ class Cr_dirtree {
 		if ( is_string($fud_id) ) $fud_q = $ee->db->get_where('upload_prefs',array('Name'=>$fud_id,'site_id'=>$site_id));
 	
 		// No FUD identification provided? DIE!
-		if ( ! is_int($fud_id) && ! is_string($fud_id) ) return '';
+		if ( ! is_int($fud_id) && ! is_string($fud_id) ) return '<p>No FUD identifier provided.</p>';
 	
 		// See if we found a FUD
 		if ( $fud_q->num_rows() > 0 )
@@ -59,7 +59,7 @@ class Cr_dirtree {
 		} else {
 	
 			// No FUD by that id / name? DIE!
-			return '';
+			return '<p>No FUD found with that ID.</p>';
 	
 		}
 	
