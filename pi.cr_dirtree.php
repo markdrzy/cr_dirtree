@@ -23,12 +23,13 @@ class Cr_dirtree {
 	public function dirtree()
 	{
 		// Instantiate EE
-		$ee =& get_instance(); // Do we need to do this in a plugin?
+		$ee =& get_instance();
 	
 	
 	
 		// Get plugin parameters
 		$fud_id				= ( $ee->TMPL->fetch_param('fud_id') )? $ee->TMPL->fetch_param('fud_id'): '';
+		$fud_name			= ( $ee->TMPL->fetch_param('fud_name') )? $ee->TMPL->fetch_param('fud_name'): '';
 		$base_list_id		= ( $ee->TMPL->fetch_param('base_list_id') )? $ee->TMPL->fetch_param('base_list_id'): '';
 		$base_list_class	= ( $ee->TMPL->fetch_param('base_list_class') )? $ee->TMPL->fetch_param('base_list_class'): '';
 		$site_id			= ( $ee->TMPL->fetch_param('site_id') )? $ee->TMPL->fetch_param('site_id'): 1;
@@ -38,13 +39,13 @@ class Cr_dirtree {
 		// Grab File Upload Destination Info
 	
 		// By FUD ID
-		if ( is_int($fud_id) ) $fud_q = $ee->db->get_where('upload_prefs',array('id'=>$fud_id,'site_id'=>$site_id));
+		if ( isset($fud_id) ) $fud_q = $ee->db->get_where('upload_prefs',array('id'=>$fud_id,'site_id'=>$site_id));
 	
 		// By FUD Name
-		if ( is_string($fud_id) ) $fud_q = $ee->db->get_where('upload_prefs',array('Name'=>$fud_id,'site_id'=>$site_id));
+		if ( isset($fud_name) ) $fud_q = $ee->db->get_where('upload_prefs',array('Name'=>$fud_name,'site_id'=>$site_id));
 	
 		// No FUD identification provided? DIE!
-		if ( ! is_int($fud_id) && ! is_string($fud_id) ) return '<p>No FUD identifier provided.</p>';
+		if ( ! isset($fud_id) && ! isset($fud_name) ) return '<p>No FUD identifier provided.</p>';
 	
 		// See if we found a FUD
 		if ( $fud_q->num_rows() > 0 )
