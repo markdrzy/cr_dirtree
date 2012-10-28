@@ -69,7 +69,7 @@ class Cr_dirtree {
 		// Grab Assets Info
 		
 		// Check to see if Assets table exists.
-		if ( $ee->db->query('SHOW TABLES LIKE `'.$ee->db->dbprefix.'assets`;')->num_rows() == 1 )
+		if ( $ee->db->query('SHOW TABLES LIKE \''.$ee->db->dbprefix.'assets\';')->num_rows() == 1 )
 		{
 			$asset_data_q = $ee->db->get('assets');
 			if ( $asset_data_q->num_rows() > 0 )
