@@ -170,7 +170,7 @@ function dirtree()
 
 }
 
-public function usage()
+function usage()
 {
 	// USAGE
 	// =====
