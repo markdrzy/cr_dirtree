@@ -59,7 +59,7 @@ class Cr_dirtree {
 		} else {
 	
 			// No FUD by that id / name? DIE!
-			return '<p>No FUD found with that ID.</p>';
+			return '<p>No FUD found with that ID ('.$fud_id.').</p>';
 	
 		}
 	
