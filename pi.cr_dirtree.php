@@ -10,10 +10,18 @@
  * @link		http://https://github.com/mark-cr
  */
 
-function dirtree($fud_id,$base_list_id='',$base_list_class='',$site_id=1)
+function dirtree()
 {
 	// Instantiate EE
 	$ee =& get_instance(); // Do we need to do this in a plugin?
+
+
+
+	// Get plugin parameters
+	$fud_id				= ( $this->EE->TMPL->fetch_param('fud_id') )? $this->EE->TMPL->fetch_param('fud_id'): '';
+	$base_list_id		= ( $this->EE->TMPL->fetch_param('base_list_id') )? $this->EE->TMPL->fetch_param('base_list_id'): '';
+	$base_list_class	= ( $this->EE->TMPL->fetch_param('base_list_class') )? $this->EE->TMPL->fetch_param('base_list_class'): '';
+	$site_id			= ( $this->EE->TMPL->fetch_param('site_id') )? $this->EE->TMPL->fetch_param('site_id'): 1;
 
 
 
