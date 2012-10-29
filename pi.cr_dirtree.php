@@ -12,7 +12,7 @@
 
 $plugin_info = array(
 	'pi_name' => 'CR Dirtree',
-	'pi_version' => '1.0',
+	'pi_version' => '1.0.1',
 	'pi_author' => 'Mark Drzycimski',
 	'pi_author_url' => 'http://github.com/mark-cr',
 	'pi_description' => 'Return an ordered list representing an ExpressionEngine File Upload Directory.',
@@ -47,7 +47,7 @@ class Cr_dirtree {
 		if ( isset($fud_name) && $fud_name ) $fud_q = $ee->db->get_where('upload_prefs',array('Name'=>$fud_name,'site_id'=>$site_id));
 	
 		// No FUD identification provided? DIE!
-		if ( ! isset($fud_id) && ! isset($fud_name) ) return '<p>No FUD identifier provided.</p>';
+		if ( ! isset($fud_id) && ! isset($fud_name) ) return $this->return_data = '<p>No FUD identifier provided.</p>';
 	
 		// See if we found a FUD
 		if ( $fud_q->num_rows() > 0 )
@@ -62,7 +62,7 @@ class Cr_dirtree {
 		} else {
 	
 			// No FUD by that id / name? DIE!
-			return '<p>No FUD found with that ID ('.$fud_id.').</p><pre>'.print_r($ee->db->get_where('upload_prefs',array('id'=>$fud_id,'site_id'=>$site_id)),TRUE).'</pre>';
+			return $this->return_data = '<p>No FUD found with that ID ('.$fud_id.').</p>';
 	
 		}
 	
