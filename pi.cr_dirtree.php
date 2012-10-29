@@ -16,11 +16,13 @@ $plugin_info = array(
 	'pi_author' => 'Mark Drzycimski',
 	'pi_author_url' => 'http://github.com/mark-cr',
 	'pi_description' => 'Return an ordered list representing an ExpressionEngine File Upload Directory.',
-	'pi_usage' => '# CR Dirtree #');
+	'pi_usage' => Cr_dirtree::usage());
 
 class Cr_dirtree {
 
-	public function dirtree()
+	public $return_data = '';
+
+	public function __construct()
 	{
 		// Instantiate EE
 		$ee =& get_instance();
@@ -186,10 +188,62 @@ class Cr_dirtree {
 	
 		// Output DOM as HTML
 		$dom->formatOutput = TRUE;
-		return $dom->saveHtml();
+		return $this->return_data = $dom->saveHtml();
 	
 	}
 
-}
 
-?>
+
+	/**
+	 * Usage
+	 *
+	 * This function describes how the plugin is used.
+	 *
+	 * @access  public
+	 * @return  string
+	 */
+	public static function usage()
+	{
+		ob_start(); ?>
+
+# CR Dirtree #
+
+This plugin will return an HTML-formatted ordered list of all files and folders within the specified file upload destination.
+
+## USAGE ##
+
+	{exp:cr_dirtree fud_id='X'}
+
+## PARAMETERS ##
+
+### fud_id ###
+
+The numeric id representing the file upload destination you wish to view (Example: 4). It is __required__ that you provide either an _fud_id_ or an _fud_name_.
+
+### fud_name ###
+
+The name given for the file upload destination as found in the file upload preferences (Example: General File Uploads). It is __required__ that you provide either an _fud_id_ or an _fud_name_.
+
+### base_list_id ###
+
+You may specify an id for the base <pre><ol></pre> using the _base_list_id_ parameter (Example: fileList). _Default value: none_
+
+### base_list_class ###
+
+You may specify a class for the base <pre><ol></pre> using the _base_list_class_ parameter (Example: fileList). _Default value: none_
+
+### site_id ###
+
+You may specify a _site_id_ if you are utilizing the Multi-site Manager (MSM) (Example: 3). _Default value: 1_
+
+	<?php
+		$buffer = ob_get_contents();
+		ob_end_clean();
+
+		return $buffer;
+	}
+	// END
+
+}
+/* End of file pi.cr_dirtree.php */
+/* Location: ./system/expressionengine/third_party/cr_dirtree/pi.cr_dirtree.php */
